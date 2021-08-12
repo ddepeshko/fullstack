@@ -1,0 +1,22 @@
+{
+  "name": "fullstack",
+  "version": "1.0.0",
+  "description": "my fullstack app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddepeshko/fullstack_app.git"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "author": "Alexandr Depeshko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ddepeshko/fullstack_app/issues"
+  },
+  "homepage": "https://github.com/ddepeshko/fullstack_app#readme"
+}
