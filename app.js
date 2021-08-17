@@ -3,18 +3,26 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+
 const authRoutes = require('./routes/auth');
 const analyticsRoutes = require('./routes/analytics');
 const categoryRoutes = require('./routes/category');
 const orderRoutes = require('./routes/order');
 const positionRoutes = require('./routes/position');
+
 const { mongoUri } = require('./config/keys');
+const setPassportStrategy = require('./middleware/passport');
+
+const app = express();
 
 mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(()=> console.log('MongoDB Connected'))
     .catch((e)=> console.log(`Error connect to DB ${e}`))
 
-const app = express();
+app.use(passport.initialize());
+setPassportStrategy(passport);
+
 app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
