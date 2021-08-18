@@ -1,4 +1,8 @@
-const getAllCategory = (req, res) => {};
+const getAllCategory = (req, res) => {
+    res.status(200).json({
+        message: 'Get all categories'
+    })
+};
 const getById = (req, res) => {};
 const removeCategory = (req, res) => {};
 const createCategory = (req, res) => {};

@@ -8,7 +8,6 @@ const User = mongoose.model('users')
 const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: keys.jwtToken
-
 }
 
 const setPassportStrategy = passport => {

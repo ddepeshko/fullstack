@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { jwtToken } = require('../config/keys');
+const errorHandler = require('../utils/errorHandler');
 
 const login = async (req, res) => {
     const candidate = await User.findOne({email: req.body.email});
@@ -39,7 +40,6 @@ const register = async (req, res) => {
         res.status(409).json({
             message: 'Email is already exists'
         });
-        throw new Error('user exist');
     } else {
         const salt = bcrypt.genSaltSync(10);
         const password = req.body.password
@@ -51,7 +51,7 @@ const register = async (req, res) => {
             await user.save();
             res.status(201).json(user);
         } catch (e) {
-            throw new Error(`Error DB ${e}`);
+            errorHandler(res, e);
         }
 
     }
