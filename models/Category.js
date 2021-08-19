@@ -5,9 +5,9 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    category: {
-        ref: 'categories',
-        type: mongoose.Schema.Types.ObjectId
+    imageSrc: {
+        type: String,
+        default: ''
 
     },
     user: {
@@ -17,6 +17,6 @@ const categorySchema = new mongoose.Schema({
     }
 });
 
-const Category = mongoose.model('category', categorySchema);
+const Category = mongoose.model('categories', categorySchema);
 
 module.exports = Category;

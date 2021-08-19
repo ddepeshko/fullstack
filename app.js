@@ -7,7 +7,7 @@ const passport = require('passport');
 
 const authRoutes = require('./routes/auth');
 const analyticsRoutes = require('./routes/analytics');
-const categoryRoutes = require('./routes/category');
+const categoryRoutes =  require('./routes/category');
 const orderRoutes = require('./routes/order');
 const positionRoutes = require('./routes/position');
 
@@ -24,6 +24,7 @@ app.use(passport.initialize());
 setPassportStrategy(passport);
 
 app.use(morgan('dev'));
+app.use('/uploads', express.static('uploads'));
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

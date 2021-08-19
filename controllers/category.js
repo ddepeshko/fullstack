@@ -7,9 +7,9 @@ const getAllCategory = async (req, res) => {
       const categories = await new Category.find({
           user: req.user.id
       });
-      req.status(200).json(categories);
+      res.status(200).json(categories);
   } catch (e) {
-    errorHandler(req, e);
+    errorHandler(res, e);
   }
 };
 const getById = async (req, res) => {
@@ -33,16 +33,35 @@ const removeCategory = async (req, res) => {
         errorHandler(req, e);
     }
 };
-const createCategory = (req, res) => {
+const createCategory = async (req, res) => {
+    const category = new Category({
+        name: req.body.name,
+        user: req.user.id,
+        imageSrc: req.file ? req.file.path : ''
+    })
     try {
-
+       await category.save();
+       res.status(201).json(category)
     } catch (e) {
         errorHandler(req, e);
     }
 };
-const updateCategory = (req, res) => {
+const updateCategory = async (req, res) => {
     try {
+        const updated = {
+            name: req.body.name,
+        };
 
+        if(req.file) {
+            updated.imageSrc = req.file.path
+        }
+
+        const category = await new Category.findOneAndUpdate(
+            {_id: req.params.id},
+            {$set: updated},
+            {new: true}
+        );
+        res.status(200).json(category);
     } catch (e) {
         errorHandler(req, e);
     }
