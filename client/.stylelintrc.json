@@ -1,0 +1,56 @@
+{
+  "extends": ["stylelint-config-recommended", "stylelint-config-prettier"],
+  "plugins": ["stylelint-prettier"],
+  "rules": {
+    "prettier/prettier": true,
+    "order/properties-order": [],
+    "plugin/rational-order": [
+      true,
+      {
+        "border-in-box-model": true,
+        "empty-line-between-groups": false
+      }
+    ],
+    "no-duplicate-selectors": true,
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null,
+    "selector-no-vendor-prefix": null,
+    "at-rule-no-vendor-prefix": null,
+    "media-feature-name-no-vendor-prefix": null,
+    "number-leading-zero": "never",
+    "font-weight-notation": "numeric",
+    "comment-whitespace-inside": "always",
+    "selector-combinator-space-after": "always",
+    "selector-attribute-quotes": "always",
+    "selector-attribute-operator-space-before": "always",
+    "selector-attribute-brackets-space-inside": "always",
+    "selector-pseudo-element-colon-notation": "single",
+    "selector-pseudo-class-parentheses-space-inside": "never",
+    "media-feature-parentheses-space-inside": "always",
+    "block-no-empty": null,
+    "color-no-invalid-hex": true,
+    "comment-empty-line-before": [
+      "always",
+      {
+        "ignore": ["stylelint-commands", "after-comment"]
+      }
+    ],
+    "declaration-colon-space-after": "always",
+    "indentation": [
+      2,
+      {
+        "message": "Please use 2 spaces for indentation. Tabs make The Architect grumpy.",
+        "severity": "warning"
+      }
+    ],
+    "max-empty-lines": 2,
+    "rule-empty-line-before": [
+      "always",
+      {
+        "except": ["first-nested"],
+        "ignore": ["after-comment"]
+      }
+    ],
+    "unit-allowed-list": ["%", "s", "px", "deg", "vh", "vw", "fr"]
+  }
+}

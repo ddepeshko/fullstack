@@ -1,0 +1,47 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {},
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.spec.ts", "src/**/*.d.ts", "*.ts"
+      ],
+      "parserOptions": {
+        "project": "./src/tsconfig.spec.json",
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+      },
+      // Правила для линтера
+      "extends": ["plugin:jasmine/recommended",  "airbnb-typescript/base", "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      // Плагин для запуска правил
+      "plugins": ["jasmine"],
+      "env": { "jasmine": true },
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
+        "class-methods-use-this": "off",
+        "lines-between-class-members": "off",
+        "@typescript-eslint/unbound-method": [
+          "error",
+          {
+            "ignoreStatic": true
+          }
+        ]
+      }
+    }
+  ]
+}
