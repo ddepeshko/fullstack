@@ -16,15 +16,36 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@constants/*": [
+        "./src/app/constants/*"
+      ],
+      "@utils/*": [
+        "./src/app/utils/*"
+      ],
+      "@directives/*": [
+        "./src/app/directives/*"
+      ],
+      "@models/*": [
+        "./src/app/models/*"
+      ],
+      "@services/*": [
+        "./src/app/services/*"
+      ],
+      "@validators/*": [
+        "./src/app/validators/*"
+      ],
+      "@modules/*": [
+        "./src/app/modules/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "allowSyntheticDefaultImports": true
   }
 }

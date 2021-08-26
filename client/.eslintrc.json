@@ -1,11 +1,6 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["eslint:recommended", "prettier"],
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module"
@@ -13,23 +8,21 @@
   "rules": {},
   "overrides": [
     {
-      "files": [
-        "src/**/*.spec.ts", "src/**/*.d.ts", "*.ts"
-      ],
+      "files": ["src/**/*.spec.ts", "src/**/*.d.ts", "*.ts"],
       "parserOptions": {
-        "project": "./src/tsconfig.spec.json",
+        "project": "tsconfig.json",
         "ecmaVersion": 2020,
         "sourceType": "module"
       },
-      // Правила для линтера
-      "extends": ["plugin:jasmine/recommended",  "airbnb-typescript/base", "prettier/@typescript-eslint",
-        "plugin:prettier/recommended"
-      ],
+      "extends": ["plugin:jasmine/recommended", "airbnb-typescript/base", "prettier"],
       "parser": "@typescript-eslint/parser",
-      // Плагин для запуска правил
       "plugins": ["jasmine"],
-      "env": { "jasmine": true },
+      "env": {
+        "jasmine": true
+      },
       "rules": {
+        "import/extensions": "off",
+        "import/no-extraneous-dependencies": "off",
         "@typescript-eslint/no-unused-vars": "off",
         "import/no-unresolved": "off",
         "import/prefer-default-export": "off",
