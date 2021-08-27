@@ -3,6 +3,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from '@modules/app.module';
 import { environment } from './environments/environment';
+import 'materialize-css/dist/js/materialize';
 
 if (environment.production) {
   enableProdMode();
