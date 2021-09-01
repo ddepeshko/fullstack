@@ -14,9 +14,6 @@ export class AppComponent implements OnInit {
   }
 
   updateStoredToken(): void {
-    const predictedToken = localStorage.getItem(LocalStorageKeys.token);
-    if (predictedToken) {
-      this.authService.setToken(predictedToken);
-    }
+    this.authService.setToken();
   }
 }

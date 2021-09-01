@@ -1,0 +1,35 @@
+<form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="card-content">
+    <div class="card-title">Регистрация</div>
+    <div class="input-field">
+      <input
+        type="email"
+        formControlName="email"
+        id="email"
+        [ngClass]="{ invalid: form.get('email')?.hasError('required') && form.get('email')?.touched }"
+      />
+      <label for="email">Email:</label>
+      <div class="error-wrapper" *ngIf="form.get('email')?.touched">
+        <div class="helper-text red-text" *ngIf="form.get('email')?.hasError('required')">Field is required</div>
+        <div class="helper-text red-text" *ngIf="form.get('email')?.hasError('email')">Field should be email</div>
+      </div>
+    </div>
+    <div class="input-field">
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        [ngClass]="{ invalid: form.get('password')?.hasError('required') && form.get('password')?.touched }"
+      />
+      <label for="password">Пароль:</label>
+      <div class="error-wrapper" *ngIf="form.get('password')?.touched">
+        <div class="helper-text red-text" *ngIf="form.get('password')?.hasError('required')">Field is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-action">
+    <button type="submit" class="modal-action btn waves-effect" [disabled]="form.invalid || form.disabled">
+      Зарегистрироваться
+    </button>
+  </div>
+</form>

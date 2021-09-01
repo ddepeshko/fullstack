@@ -3,4 +3,7 @@ export enum RoutesLinks {
   Auth = 'auth',
   Login = 'login',
   Register = 'register',
+  Categories = 'categories',
+  Analytics = 'analytics',
+  History = 'history',
 }
