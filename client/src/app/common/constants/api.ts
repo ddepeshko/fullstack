@@ -5,4 +5,7 @@ export const api = {
     login: '/login',
     register: '/register',
   },
+  category: {
+    categoryRoute: '/category',
+  },
 };

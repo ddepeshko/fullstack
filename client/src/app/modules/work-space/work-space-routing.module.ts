@@ -25,6 +25,10 @@ const routes: Route[] = [
         path: RoutesLinks.Categories,
         loadChildren: () => import('./pages/categories/categories.module').then((m) => m.CategoriesModule),
       },
+      {
+        path: RoutesLinks.Orders,
+        loadChildren: () => import('./pages/orders/orders.module').then((m) => m.OrdersModule),
+      },
     ],
   },
 ];

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Token, User } from '../../../../common/models/user';
+import { Token, IUser } from '../../../../common/models/user';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { RoutesLinks } from '../../../../common/constants/routes';
@@ -33,12 +33,12 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(): void {
-    const user: User = { ...this.form.value };
+    const user: IUser = { ...this.form.value };
     this.authService
       .register(user)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (data: User) => {
+        (data: IUser) => {
           this.form.enable();
           this.router.navigate([`${RoutesLinks.Auth}/${RoutesLinks.Login}`], {
             queryParams: {

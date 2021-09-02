@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth.service';
-import { User, Token } from '../../../../common/models/user';
+import { IUser } from '../../../../common/models/user';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private loginUser(): void {
-    const user: User = { ...this.form.value };
+    const user: IUser = { ...this.form.value };
     this.authService
       .login(user)
       .pipe(takeUntil(this.destroy$))

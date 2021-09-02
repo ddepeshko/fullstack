@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "concurrently": "^6.2.1",
+    "ng-inline-svg": "^13.0.0",
     "nodemon": "^2.0.12",
     "nstall": "^0.2.0"
   }

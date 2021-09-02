@@ -1,0 +1,7 @@
+<ul class="sidenav sidenav-fixed a-sidenav">
+  <h4>Newborn</h4>
+  <li *ngFor="let link of linksList" class="bold" routerLinkActive="active">
+    <a [routerLink]="link.url" class="waves-effect waves-orange">{{ link.title }}</a>
+  </li>
+  <li class="bold last" (click)="logout($event)"><a class="waves-effect waves-orange">Выйти</a></li>
+</ul>
