@@ -4,7 +4,7 @@ export enum RoutesLinks {
   Login = 'login',
   Register = 'register',
   Categories = 'categories',
-  NewCategory = 'categories/new',
+  NewCategory = 'add-category',
   Analytics = 'analytics',
   History = 'history',
   Orders = 'orders',

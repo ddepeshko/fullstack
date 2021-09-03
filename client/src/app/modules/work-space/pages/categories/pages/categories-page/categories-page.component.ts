@@ -2,44 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { RoutesLinks } from '../../../../../../common/constants/routes';
 import { CategoriesService } from '../../../../../../core/services/categories.service';
 import { ICategory } from '../../../../../../common/models/category';
-import { throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ILoadable } from '../../../../../../common/models/loadable';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-categories-page',
   templateUrl: './categories-page.component.html',
   styleUrls: ['./categories-page.component.scss'],
 })
-export class CategoriesPageComponent implements OnInit, ILoadable {
+export class CategoriesPageComponent implements OnInit {
   public addCategoryLink: string = RoutesLinks.NewCategory;
   public categoryLink: string = RoutesLinks.Categories;
-  public isLoading: boolean = false;
-  public categoriesList: ICategory[] = [];
+  public categories$: Observable<ICategory[]>;
 
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.getAllCategories();
+    this.categories$ = this.getAllCategories();
   }
 
-  getAllCategories(): void {
-    this.isLoading = true;
-    this.categoriesService
-      .getAllCategories()
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe(
-        (response: ICategory[]) => {
-          this.categoriesList = response;
-        },
-        (error) => {
-          throwError(error);
-        }
-      );
+  getAllCategories(): Observable<ICategory[]> {
+    return this.categoriesService.getAllCategories();
   }
 
   public createCategory() {
