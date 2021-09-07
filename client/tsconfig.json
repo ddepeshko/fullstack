@@ -20,22 +20,25 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "@constants/*": [
-        "./src/app/constants/*"
+        "./src/app/common/constants/*"
       ],
       "@utils/*": [
-        "./src/app/utils/*"
+        "./src/app/common/utils/*"
       ],
       "@directives/*": [
         "./src/app/directives/*"
       ],
       "@models/*": [
-        "./src/app/models/*"
+        "./src/app/common/models/*"
+      ],
+      "@classes/*": [
+        "./src/app/common/classes/*"
       ],
       "@services/*": [
-        "./src/app/services/*"
+        "./src/app/core/services/*"
       ],
       "@validators/*": [
-        "./src/app/validators/*"
+        "./src/app/common/validators/*"
       ],
       "@modules/*": [
         "./src/app/modules/*"

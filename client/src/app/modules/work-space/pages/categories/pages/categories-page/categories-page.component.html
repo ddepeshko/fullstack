@@ -7,7 +7,7 @@
   <div class="col s12" *ngIf="categories$ | async as categories; else loadingBlock">
     <ng-container *ngIf="categories.length; else noDataBlock">
       <div class="collection">
-        <a *ngFor="let category of categories" [routerLink]="[categoryLink, category.id]" class="collection-item">
+        <a *ngFor="let category of categories" [routerLink]="[category._id]" class="collection-item">
           {{ category.name }}</a
         >
       </div>

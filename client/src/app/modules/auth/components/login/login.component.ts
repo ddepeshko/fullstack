@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../../core/services/auth.service';
-import { IUser } from '../../../../common/models/user';
+import { AuthService } from '@services/auth.service';
+import { IUser } from '@models/user';
 import { Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { RoutesLinks } from '../../../../common/constants/routes';
+import { RoutesLinks } from '@constants/routes';
 
 @Component({
   selector: 'app-login',

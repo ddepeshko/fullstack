@@ -2,7 +2,7 @@ import { IUser } from './user';
 
 export interface ICategory {
   name: string;
-  imgSrc?: string;
+  imageSrc?: string;
   user?: IUser;
-  id?: number;
+  _id?: number;
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ICategory } from '../../common/models/category';
-import { api } from '../../common/constants/api';
+import { ICategory } from '@models/category';
+import { api } from '@constants/api';
 
 @Injectable()
 export class CategoriesService {
@@ -12,7 +12,28 @@ export class CategoriesService {
     return this.http.get<ICategory[]>(`${api.baseUrl}${api.category.categoryRoute}`);
   }
 
-  public createCategory(category: ICategory): Observable<ICategory> {
-    return this.http.post<ICategory>(`${api.baseUrl}${api.category.categoryRoute}`, category);
+  public createCategory(name: string, image: File): Observable<ICategory> {
+    const formData = new FormData();
+    if (image) {
+      formData.append('image', image, image.name);
+    }
+    formData.append('name', name);
+    return this.http.post<ICategory>(`${api.baseUrl}${api.category.categoryRoute}`, formData);
+  }
+
+  public updateCategory(id: number, name: string, image: File): Observable<ICategory> {
+    const formData = new FormData();
+    if (image) {
+      formData.append('image', image, image.name);
+    }
+    formData.append('name', name);
+    return this.http.patch<ICategory>(
+      `${api.baseUrl}${api.category.categoryById}`.replace('{id}', String(id)),
+      formData
+    );
+  }
+
+  public getCategoryById(id: number): Observable<ICategory> {
+    return this.http.get<ICategory>(`${api.baseUrl}${api.category.categoryById}`.replace('{id}', String(id)));
   }
 }

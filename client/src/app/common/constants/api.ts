@@ -7,5 +7,6 @@ export const api = {
   },
   category: {
     categoryRoute: '/category',
+    categoryById: '/category/{id}',
   },
 };

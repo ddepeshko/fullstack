@@ -14,7 +14,7 @@ const getAllCategory = async (req, res) => {
 };
 const getById = async (req, res) => {
   try {
-    const category = await new Category.findById({ _id: req.params.id });
+    const category = await Category.findById({ _id: req.params.id });
     res.status(200).json(category);
   } catch (e) {
     errorHandler(req, e);
@@ -54,7 +54,7 @@ const updateCategory = async (req, res) => {
       updated.imageSrc = req.file.path;
     }
 
-    const category = await new Category.findOneAndUpdate(
+    const category = await Category.findOneAndUpdate(
       { _id: req.params.id },
       { $set: updated },
       { new: true }
