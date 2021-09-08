@@ -9,4 +9,8 @@ export const api = {
     categoryRoute: '/category',
     categoryById: '/category/{id}',
   },
+  positions: {
+    positionsRoute: '/positions',
+    positionsById: '/positions/{id}',
+  },
 };

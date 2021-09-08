@@ -22,8 +22,8 @@ const getById = async (req, res) => {
 };
 const removeCategory = async (req, res) => {
   try {
-    await new Category.remove({ _id: req.params.id });
-    await new Position.remove({ category: req.params.id });
+    await Category.remove({ _id: req.params.id });
+    await Position.remove({ category: req.params.id });
     res.status(200).json({
       message: "Category was deleted",
     });

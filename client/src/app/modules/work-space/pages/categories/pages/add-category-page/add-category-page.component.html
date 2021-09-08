@@ -4,8 +4,8 @@
     <i class="material-icons">keyboard_arrow_right</i>
     {{ isEditForm ? 'Редактировать категорию' : 'Добавить категорию' }}
   </h4>
-  <span>
-    <button class="btn btn-small red">
+  <span *ngIf="isEditForm">
+    <button class="btn btn-small red" (click)="deleteCategory()">
       <i class="material-icons">delete</i>
     </button>
   </span>
@@ -28,31 +28,15 @@
         Имя не может быть пустым
       </span>
     </div>
+    <app-upload [imageUrl]="imageUrl" [isFormDisabled]="form.disabled" (uploadImage)="updateImage($event)"></app-upload>
 
-    <div>
-      <input type="file" hidden #fileInput (change)="onFileChange($event)" accept="image/*" />
-      <button
-        class="waves-effect waves-light btn orange lighten-2 mb2"
-        type="button"
-        [disabled]="form.disabled"
-        (click)="fileInput.click()"
-      >
-        <i class="material-icons left">backup</i>
-        Загрузить изображение
-      </button>
-    </div>
-
-    <div>
+    <div class="text-left">
       <button class="waves-effect waves-light btn" type="submit" [disabled]="form.invalid || form.disabled">
         Сохранить изменения
       </button>
     </div>
   </div>
-
-  <div class="col s12 l4 center">
-    <img class="responsive-img" [src]="imageUrl" *ngIf="imageUrl" />
-  </div>
 </form>
 <div class="row">
-  <app-positions></app-positions>
+  <app-positions *ngIf="form.value?.id" [categoryId]="form.value?.id"></app-positions>
 </div>

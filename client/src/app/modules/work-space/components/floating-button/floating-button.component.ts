@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MaterialServices } from '../../../../common/classes/material-services';
-import { RoutesLinks } from '../../../../common/constants/routes';
+import { MaterialServices } from '@classes/material-services';
+import { RoutesLinks } from '@constants/routes';
 
 @Component({
   selector: ' app-floating-button',

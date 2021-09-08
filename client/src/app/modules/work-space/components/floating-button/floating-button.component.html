@@ -7,7 +7,9 @@
       <a [routerLink]="routes.Orders" class="btn-floating green"><i class="material-icons">assignment</i></a>
     </li>
     <li>
-      <a class="btn-floating blue" [routerLink]="routes.NewCategory"><i class="material-icons">list</i></a>
+      <a class="btn-floating blue" [routerLink]="routes.Categories + '/' + routes.NewCategory"
+        ><i class="material-icons">list</i></a
+      >
     </li>
   </ul>
 </div>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICategory } from '@models/category';
 import { api } from '@constants/api';
+import { IMessage } from '@models/message';
 
 @Injectable()
 export class CategoriesService {
@@ -35,5 +36,9 @@ export class CategoriesService {
 
   public getCategoryById(id: number): Observable<ICategory> {
     return this.http.get<ICategory>(`${api.baseUrl}${api.category.categoryById}`.replace('{id}', String(id)));
+  }
+
+  public deleteCategory(id: number): Observable<IMessage> {
+    return this.http.delete<IMessage>(`${api.baseUrl}${api.category.categoryById}`.replace('{id}', String(id)));
   }
 }

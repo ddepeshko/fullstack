@@ -1,0 +1,17 @@
+<div class="upload">
+  <div class="upload-controls">
+    <input type="file" hidden #fileInput (change)="onFileChange($event)" accept="image/*" />
+    <button
+      class="waves-effect waves-light btn orange lighten-2 mb2"
+      type="button"
+      [disabled]="isFormDisabled"
+      (click)="fileInput.click()"
+    >
+      <i class="material-icons left">backup</i>
+      Загрузить изображение
+    </button>
+  </div>
+  <div class="center">
+    <img class="responsive-img" [src]="imageUrl" *ngIf="imageUrl" />
+  </div>
+</div>

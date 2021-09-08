@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriesService } from '@services/categories.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ICategory } from '@models/category';
 import { of, Subject } from 'rxjs';
 import { MaterialServices } from '@classes/material-services';
+import { IMessage } from '@models/message';
+import { RoutesLinks } from '@constants/routes';
 
 @Component({
   selector: 'app-add-category-page',
@@ -22,7 +24,8 @@ export class AddCategoryPageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private categoryService: CategoriesService
+    private categoryService: CategoriesService,
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -51,16 +54,6 @@ export class AddCategoryPageComponent implements OnInit, OnDestroy {
     } else {
       this.createCategory();
     }
-  }
-  public onFileChange(event: Event): void {
-    const file: File = ((event.target as HTMLInputElement).files as FileList)[0];
-    this.imageFile = file;
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imageUrl = reader.result as string;
-    };
-
-    reader.readAsDataURL(file);
   }
 
   private obtainCategoryDataById() {
@@ -123,5 +116,26 @@ export class AddCategoryPageComponent implements OnInit, OnDestroy {
           MaterialServices.toast(error.error.message);
         }
       );
+  }
+
+  public deleteCategory(): void {
+    const decision = confirm(`Вы уверены, что хотите удалить категоию ${this.form.value.name}`);
+    if (decision) {
+      this.categoryService.deleteCategory(this.form.value.id).subscribe(
+        (response: IMessage) => {
+          MaterialServices.toast(response.message);
+        },
+        (error) => {
+          MaterialServices.toast(error.error.message);
+        },
+        () => {
+          this.router.navigate([RoutesLinks.Categories]);
+        }
+      );
+    }
+  }
+
+  public updateImage(imageFile: File): void {
+    this.imageFile = imageFile;
   }
 }
