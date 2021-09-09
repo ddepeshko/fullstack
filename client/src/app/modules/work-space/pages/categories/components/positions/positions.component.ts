@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { ILoadable } from '@models/loadable';
 import { MaterialServices } from '@classes/material-services';
 import { IMaterialInstance } from '@models/material-instance';
+import { IMessage } from '@models/message';
 
 @Component({
   selector: 'app-positions',
@@ -64,5 +65,41 @@ export class PositionsComponent implements OnInit, OnDestroy, ILoadable, AfterVi
     this.modal.open();
   }
 
-  onFormSubmit(formValue: { name: string; cost: number }) {}
+  onCreatePosition(position: IPositions) {
+    this.isLoading = true;
+    position.category = this.categoryId;
+    this.positionService
+      .createPosition(position)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (positions: IPositions[]) => {
+          this.isLoading = false;
+          this.positions = positions;
+          MaterialServices.toast('Позиция создана');
+          this.modal.close();
+        },
+        (error) => {
+          this.isLoading = false;
+          MaterialServices.toast(error.error.message);
+        }
+      );
+  }
+
+  onDeletePosition(position: IPositions) {
+    if (!position._id) return;
+    this.isLoading = true;
+    this.positionService
+      .deletePosition(position._id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (message: IMessage) => {
+          this.isLoading = false;
+          MaterialServices.toast(message.message);
+        },
+        (error) => {
+          this.isLoading = false;
+          MaterialServices.toast(error.error.message);
+        }
+      );
+  }
 }

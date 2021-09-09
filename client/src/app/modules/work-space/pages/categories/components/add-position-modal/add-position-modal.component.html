@@ -18,18 +18,28 @@
         id="cost"
         type="text"
         formControlName="cost"
-        [ngClass]="{ invalid: form.get('cost')?.hasError('required') && form.get('cost')?.touched }"
+        [ngClass]="{
+          invalid: form.get('cost')?.errors && form.get('cost')?.touched
+        }"
       />
       <label for="cost">Цена</label>
       <div class="error-wrapper" *ngIf="form.get('cost')?.touched">
         <div class="helper-text red-text" *ngIf="form.get('cost')?.hasError('required')">Field is required</div>
+        <div class="helper-text red-text" *ngIf="form.get('cost')?.hasError('min')">Value should be bigger</div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="modal-action waves-effect waves-black btn-flat" (click)="onCloseModal()">
+    <button
+      type="button"
+      class="modal-action waves-effect waves-black btn-flat"
+      (click)="onCloseModal()"
+      [disabled]="form.disabled"
+    >
       Отмена
     </button>
-    <button type="submit" class="modal-action btn waves-effect">Сохранить</button>
+    <button type="submit" class="modal-action btn waves-effect" [disabled]="form.invalid || form.disabled">
+      Сохранить
+    </button>
   </div>
 </form>

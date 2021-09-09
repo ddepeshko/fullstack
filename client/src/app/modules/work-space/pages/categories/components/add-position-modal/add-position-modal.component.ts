@@ -20,7 +20,7 @@ export class AddPositionModalComponent implements OnInit {
   private initForm(): void {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
-      cost: [null, Validators.required],
+      cost: [null, [Validators.required, Validators.min(1)]],
     });
   }
 

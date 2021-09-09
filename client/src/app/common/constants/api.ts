@@ -10,7 +10,7 @@ export const api = {
     categoryById: '/category/{id}',
   },
   positions: {
-    positionsRoute: '/positions',
-    positionsById: '/positions/{id}',
+    positionsRoute: '/position',
+    positionsById: '/position/{id}',
   },
 };

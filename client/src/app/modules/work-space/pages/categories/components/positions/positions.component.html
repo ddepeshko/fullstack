@@ -15,7 +15,7 @@
         <span>
           {{ position?.name }} <strong>{{ position?.cost }}</strong>
         </span>
-        <span>
+        <span (click)="onDeletePosition(position)">
           <i class="material-icons">delete</i>
         </span>
       </a>
@@ -31,5 +31,5 @@
   <app-loader></app-loader>
 </ng-template>
 <div class="modal" #modal>
-  <app-add-position-modal (formValueEmitter)="onFormSubmit($event)"></app-add-position-modal>
+  <app-add-position-modal (formValueEmitter)="onCreatePosition($event)"></app-add-position-modal>
 </div>
