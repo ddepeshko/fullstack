@@ -31,5 +31,8 @@
   <app-loader></app-loader>
 </ng-template>
 <div class="modal" #modal>
-  <app-add-position-modal (formValueEmitter)="onCreatePosition($event)"></app-add-position-modal>
+  <app-add-position-modal
+    [position]="selectedPosition"
+    (formValueEmitter)="onCreatePosition($event)"
+  ></app-add-position-modal>
 </div>

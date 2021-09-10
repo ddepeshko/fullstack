@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { PositionsService } from '@services/positions.service';
 import { IPositions } from '@models/positions';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ILoadable } from '@models/loadable';
 import { MaterialServices } from '@classes/material-services';
@@ -20,6 +20,7 @@ export class PositionsComponent implements OnInit, OnDestroy, ILoadable, AfterVi
   private destroy$ = new Subject<any>();
   public isLoading: boolean;
   public modal: IMaterialInstance;
+  public selectedPosition: IPositions;
   constructor(private positionService: PositionsService) {}
 
   ngOnInit(): void {
@@ -57,8 +58,10 @@ export class PositionsComponent implements OnInit, OnDestroy, ILoadable, AfterVi
   public initModal(): void {
     this.modal = MaterialServices.initModal(this.modalRef);
   }
+
   public onSelectPosition(position: IPositions): void {
     this.modal.open();
+    this.selectedPosition = position;
   }
 
   public addPosition() {
@@ -90,11 +93,17 @@ export class PositionsComponent implements OnInit, OnDestroy, ILoadable, AfterVi
     this.isLoading = true;
     this.positionService
       .deletePosition(position._id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (message: IMessage) => {
-          this.isLoading = false;
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((message: IMessage) => {
           MaterialServices.toast(message.message);
+          return this.positionService.getAllPositions(this.categoryId);
+        })
+      )
+      .subscribe(
+        (positions: IPositions[]) => {
+          this.isLoading = false;
+          this.positions = positions;
         },
         (error) => {
           this.isLoading = false;
