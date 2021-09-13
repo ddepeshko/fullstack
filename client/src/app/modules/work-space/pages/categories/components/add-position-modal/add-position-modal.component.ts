@@ -12,7 +12,7 @@ export class AddPositionModalComponent implements OnInit, OnChanges {
   public modal: IMaterialInstance;
   public form: FormGroup;
   @Input() position: IPositions;
-  @Output() formValueEmitter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() formValueEmitter: EventEmitter<IPositions> = new EventEmitter<IPositions>();
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
@@ -23,6 +23,7 @@ export class AddPositionModalComponent implements OnInit, OnChanges {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
       cost: [null, [Validators.required, Validators.min(1)]],
+      _id: [null],
     });
   }
 
@@ -44,6 +45,7 @@ export class AddPositionModalComponent implements OnInit, OnChanges {
       this.form.patchValue({
         name: this.position.name,
         cost: this.position.cost,
+        _id: this.position._id,
       });
       this.form.enable();
     }

@@ -34,12 +34,17 @@ const createPosition = async (req, res) => {
 };
 const updatePosition = async (req, res) => {
   try {
-    const position = await new Position.findByIdAndUpdate(
+    await Position.findByIdAndUpdate(
       { _id: req.params.id },
       { $set: req.body },
       { new: true }
     );
-    res.status(200).json(position);
+
+    const positions = await Position.find({
+      category: req.body.category,
+      user: req.user.id,
+    });
+    res.status(200).json(positions);
   } catch (e) {
     errorHandler(res, e);
   }

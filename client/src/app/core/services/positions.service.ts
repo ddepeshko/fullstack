@@ -20,4 +20,8 @@ export class PositionsService {
   public deletePosition(id: string): Observable<IMessage> {
     return this.http.delete<IMessage>(`${api.baseUrl}${api.positions.positionsById}`.replace('{id}', id));
   }
+
+  public updatePosition(position: IPositions, id: string): Observable<IPositions[]> {
+    return this.http.patch<IPositions[]>(`${api.baseUrl}${api.positions.positionsById}`.replace('{id}', id), position);
+  }
 }

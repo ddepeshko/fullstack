@@ -1,9 +1,7 @@
 <div class="col s12">
   <div class="page-subtitle">
     <h4>Позиции:</h4>
-    <button class="waves-effect waves-light btn grey darken-1 btn-small" (click)="addPosition()">
-      Добавить позицию
-    </button>
+    <button class="waves-effect waves-light btn grey darken-1 btn-small" (click)="openModal()">Добавить позицию</button>
   </div>
   <ng-container *ngIf="!isLoading; else loadingBlock">
     <div class="collection" *ngIf="positions?.length; else emptyBlock">
@@ -33,6 +31,6 @@
 <div class="modal" #modal>
   <app-add-position-modal
     [position]="selectedPosition"
-    (formValueEmitter)="onCreatePosition($event)"
+    (formValueEmitter)="onPositionDataChanged($event)"
   ></app-add-position-modal>
 </div>

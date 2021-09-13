@@ -21,6 +21,7 @@ export class PositionsComponent implements OnInit, OnDestroy, ILoadable, AfterVi
   public isLoading: boolean;
   public modal: IMaterialInstance;
   public selectedPosition: IPositions;
+
   constructor(private positionService: PositionsService) {}
 
   ngOnInit(): void {
@@ -39,6 +40,19 @@ export class PositionsComponent implements OnInit, OnDestroy, ILoadable, AfterVi
     this.initModal();
   }
 
+  public initModal(): void {
+    this.modal = MaterialServices.initModal(this.modalRef);
+  }
+
+  public onSelectPosition(position: IPositions): void {
+    this.openModal();
+    this.selectedPosition = position;
+  }
+
+  public openModal(): void {
+    this.modal.open();
+  }
+
   private obtainPositions(): void {
     this.isLoading = true;
     this.positionService
@@ -51,25 +65,17 @@ export class PositionsComponent implements OnInit, OnDestroy, ILoadable, AfterVi
         },
         (error) => {
           this.isLoading = false;
+          MaterialServices.toast(error.error.message);
         }
       );
   }
 
-  public initModal(): void {
-    this.modal = MaterialServices.initModal(this.modalRef);
-  }
-
-  public onSelectPosition(position: IPositions): void {
-    this.modal.open();
-    this.selectedPosition = position;
-  }
-
-  public addPosition() {
-    this.modal.open();
-  }
-
-  onCreatePosition(position: IPositions) {
+  public onPositionDataChanged(position: IPositions): void {
     this.isLoading = true;
+    position._id ? this.onUpdatePosition(position) : this.onCreatePosition(position);
+  }
+
+  public onCreatePosition(position: IPositions): void {
     position.category = this.categoryId;
     this.positionService
       .createPosition(position)
@@ -88,7 +94,27 @@ export class PositionsComponent implements OnInit, OnDestroy, ILoadable, AfterVi
       );
   }
 
-  onDeletePosition(position: IPositions) {
+  public onUpdatePosition(position: IPositions): void {
+    if (!position._id) return;
+    position.category = this.categoryId;
+    this.positionService
+      .updatePosition(position, position._id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (positions: IPositions[]) => {
+          this.isLoading = false;
+          this.positions = positions;
+          MaterialServices.toast('Позиция обновлена');
+          this.modal.close();
+        },
+        (error) => {
+          this.isLoading = false;
+          MaterialServices.toast(error.error.message);
+        }
+      );
+  }
+
+  public onDeletePosition(position: IPositions): void {
     if (!position._id) return;
     this.isLoading = true;
     this.positionService
