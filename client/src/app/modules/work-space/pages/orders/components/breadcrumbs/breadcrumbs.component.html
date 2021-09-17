@@ -1,0 +1,14 @@
+<div class="page-title">
+  <h4>
+    <ng-container *ngIf="isRoot; else withNavigation">
+      <span>{{ pageTitle }}</span>
+    </ng-container>
+  </h4>
+  <button class="waves-effect btn grey darken-1 modal-trigger" data-target="explore-order">Завершить</button>
+</div>
+
+<ng-template #withNavigation>
+  <a routerLink="./">{{ pageTitle }}</a>
+  <i class="material-icons" *ngIf="currentPageTitle">keyboard_arrow_right</i>
+  {{ currentPageTitle }}
+</ng-template>

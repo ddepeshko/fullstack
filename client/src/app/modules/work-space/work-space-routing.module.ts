@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WorkSpacePageComponent } from '@modules/work-space/pages/work-space-page/work-space-page.component';
-import { Route, Router, RouterModule } from '@angular/router';
-import { RoutesLinks } from '../../common/constants/routes';
+import { Route, RouterModule } from '@angular/router';
+import { RoutesLinks } from '@constants/routes';
 
 const routes: Route[] = [
   {

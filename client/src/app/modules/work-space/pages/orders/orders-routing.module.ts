@@ -12,11 +12,18 @@ const routes: Route[] = [
         path: '',
         loadChildren: () =>
           import('./pages/categories-list-page/categories-list-page.module').then((m) => m.CategoriesListPageModule),
+        data: {
+          isRoot: true,
+        },
       },
       {
-        path: 'positions',
+        path: ':id',
         loadChildren: () =>
           import('./pages/positions-list-page/positions-list-page.module').then((m) => m.PositionsListPageModule),
+        data: {
+          isRoot: false,
+          currentPageTitle: 'Добавить продукцию',
+        },
       },
     ],
   },
